@@ -68,6 +68,7 @@ platform_check_image() {
 	omni-plug | \
 	psr-680w | \
 	px4885 | \
+	neow1 | \
 	rp-n53 | \
 	rt-g32-b1 | \
 	rt-n10-plus | \

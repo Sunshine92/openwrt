@@ -16,6 +16,9 @@ ramips_board_detect() {
 	*"7Links PX-4885")
 		name="px4885"
 		;;
+	*"Citus NeoW1")
+		name="neow1"
+		;;
 	*"8devices Carambola")
 		name="carambola"
 		;;

@@ -1,0 +1,121 @@
+/dts-v1/;
+
+/include/ "rt5350.dtsi"
+
+/ {
+	compatible = "NeoW1", "ralink,rt5350-soc";
+	model = "Citus NeoW1";
+
+	palmbus@10000000 {
+		spi@b00 {
+			status = "okay";
+			m25p80@0 {
+				#address-cells = <1>;
+				#size-cells = <1>;
+				compatible = "mx25l3205d";
+				reg = <0 0>;
+				linux,modalias = "m25p80", "mx25l3205d";
+				spi-max-frequency = <10000000>;
+
+				partition@0 {
+					label = "ALL";
+					reg = <0x0 0x80000>;
+				};
+
+				partition@1 {
+					label = "Bootloader";
+					reg = <0x0 0x20000>;
+					read-only;
+				};
+
+				partition@20000 {
+					label = "Config";
+					reg = <0x20000 0x20000>;
+					read-only;
+				};
+
+				factory: partition@40000 {
+					label = "Factory";
+					reg = <0x40000 0x10000>;
+					read-only;
+				};
+
+				partition@50000 {
+					label = "Kernel_RootFS";
+					reg = <0x50000 0x7B0000>;
+				};
+
+				partition@50001 {
+					label = "Kernel";
+					reg = <0x50000 0x1334AA>;
+				};
+
+				partition@1834aa {
+					label = "RootFS";
+					reg = <0x1834aa 0x67CB56>;
+				};
+			};
+		};
+	};
+
+	pinctrl {
+		state_default: pinctrl0 {
+			gpio {
+				ralink,group = "i2c", "uartf";
+				ralink,function = "gpio";
+			};
+		};
+	};
+
+	ethernet@10100000 {
+		mtd-mac-address = <&factory 0x28>;
+	};
+
+	esw@10110000 {
+		ralink,portmap = <0x3f>;
+	};
+
+	wmac@10180000 {
+		ralink,mtd-eeprom = <&factory 0>;
+	};
+
+	gpio-keys-polled {
+		compatible = "gpio-keys-polled";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		poll-interval = <20>;
+		reset {
+			label = "reset";
+			gpios = <&gpio0 10 1>;
+			linux,code = <0x198>;
+		};
+	};
+
+	gpio-leds {
+		compatible = "gpio-leds";
+		red {
+			label = "neow1:red:power";
+			gpios = <&gpio0 18 1>;
+		};
+		green {
+			label = "neow1:green:power";
+			gpios = <&gpio0 19 1>;
+		};
+		battery-one {
+			label = "neow1:green:battery-one";
+			gpios = <&gpio0 7 1>;
+		};
+		battery-two {
+			label = "neow1:green:battery-two";
+			gpios = <&gpio0 8 1>;
+		};
+		battery-three {
+			label = "neow1:green:battery-three";
+			gpios = <&gpio0 9 1>;
+		};
+		battery-four {
+			label = "neow1:green:battery-four";
+			gpios = <&gpio0 10 1>;
+		};
+	};
+};

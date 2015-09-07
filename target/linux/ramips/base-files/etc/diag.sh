@@ -105,6 +105,9 @@ get_status_led() {
 	px4885)
 		status_led="7links:orange:wifi"
 		;;
+	neow1)
+		status_led="neow1:green:power"
+		;;
 	rt-n15)
 		status_led="rt-n15:blue:power"
 		;;
