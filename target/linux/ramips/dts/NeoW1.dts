@@ -7,7 +7,7 @@
 	model = "Citus NeoW1";
 
         chosen {
-                bootargs = "console=ttyS1,57600n8";
+                bootargs = "console=ttyS0,57600 root=/dev/mtdblock3";
         };
 
 	palmbus@10000000 {
@@ -22,11 +22,6 @@
 				spi-max-frequency = <10000000>;
 
 				partition@0 {
-					label = "ALL";
-					reg = <0x0 0x80000>;
-				};
-
-				partition@1 {
 					label = "Bootloader";
 					reg = <0x0 0x20000>;
 					read-only;
@@ -46,18 +41,9 @@
 
 				partition@50000 {
 					label = "Kernel_RootFS";
-					reg = <0x50000 0x7B0000>;
+					reg = <0x50000 0x3b0000>;
 				};
 
-				partition@50001 {
-					label = "Kernel";
-					reg = <0x50000 0x1334AA>;
-				};
-
-				partition@1834aa {
-					label = "RootFS";
-					reg = <0x1834aa 0x67CB56>;
-				};
 			};
 		};
 	};

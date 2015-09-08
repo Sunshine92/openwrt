@@ -466,7 +466,7 @@ Image/Build/Profile/PWH2004=$(call BuildFirmware/Default8M/$(1),$(1),pwh2004,PWH
 
 Image/Build/Profile/PX4885=$(call BuildFirmware/Default4M/$(1),$(1),px4885,PX4885)
 
-Image/Build/Profile/NeoW1=$(call BuildFirmware/Default8M/$(1),$(1),neow1,NeoW1)
+Image/Build/Profile/NeoW1=$(call BuildFirmware/Default4M/$(1),$(1),neow1,NeoW1)
 
 Image/Build/Profile/RTG32B1=$(call BuildFirmware/Default4M/$(1),$(1),rt-g32-b1,RT-G32-B1)
 
